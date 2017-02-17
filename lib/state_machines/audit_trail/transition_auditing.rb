@@ -17,7 +17,7 @@ module StateMachines::AuditTrail::TransitionAuditing
   #   - :initial - if false, won't log null => initial state transition upon instantiation
   #
   def audit_trail(options = {})
-    state_machine = self
+    state_machine = options[:owner_class] ? options[:owner_class].state_machine : self
     if options[:class].presence
       raise ":class option[#{options[:class]}] must be a class (not a string)." unless options[:class].is_a? Class
     end
